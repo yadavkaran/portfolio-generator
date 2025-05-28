@@ -2,6 +2,10 @@ import { Box, Container, Heading, Text, Button, VStack, useColorMode } from '@ch
 import { motion } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
 
+// Import your background images here
+import heroBg1 from '../assets/veedhi1.jpg' // <-- Replace with your actual image path
+import heroBg2 from '../assets/veedhi2.jpg' // <-- Replace with your actual image path
+
 const MotionBox = motion(Box)
 
 interface HeroProps {
@@ -21,8 +25,40 @@ const Hero = ({ name, title }: HeroProps) => {
       alignItems="center"
       bg={colorMode === 'dark' ? 'gray.900' : 'gray.50'}
       pt={20}
+      position="relative"
+      overflow="hidden"
     >
-      <Container maxW="1200px">
+      {/* Background Element 1 */}
+      <Box
+        position="absolute"
+        top={{ base: "10%", md: "15%" }}
+        left={{ base: "-20%", md: "-10%" }}
+        width={{ base: "80%", md: "40%" }}
+        height={{ base: "60%", md: "70%" }}
+        backgroundImage={`url(${heroBg1})`}
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        opacity="0.5" // Adjust opacity as needed
+        zIndex={1}
+      />
+
+      {/* Background Element 2 */}
+      <Box
+        position="absolute"
+        bottom={{ base: "10%", md: "15%" }}
+        right={{ base: "-20%", md: "-10%" }}
+        width={{ base: "80%", md: "40%" }}
+        height={{ base: "60%", md: "70%" }}
+        backgroundImage={`url(${heroBg2})`}
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        opacity="0.5" // Adjust opacity as needed
+        zIndex={1}
+      />
+
+      <Container maxW="1200px" position="relative" zIndex={2}> {/* Ensure content is above background */} 
         <VStack spacing={8} align="center" textAlign="center">
           <MotionBox
             initial={{ opacity: 0, y: 20 }}
@@ -61,7 +97,7 @@ const Hero = ({ name, title }: HeroProps) => {
               size="lg"
               onClick={() => {
                 // Add resume download functionality
-                console.log('Download resume')
+                window.open('https://drive.google.com/file/d/1CDhPLBUMc6BH96X90nv-sI_23y2FALTw/view?usp=sharing', '_blank');
               }}
             >
               Download Resume
