@@ -129,7 +129,7 @@ function App() {
           <Contact 
             email="yadavsiddhant5@gmail.com"
             phone="+91 7506927677"
-            linkedin="linkedin.com/in/siddhant-yadav-53aa5b160/"
+            linkedin="https://www.linkedin.com/in/siddhant-yadav-53aa5b160/"
             visa="Valid United States of America (U.S). B1/B2 Visa (Multiple Entry, Valid Until 2035)"
           />
         </Box>

@@ -97,7 +97,7 @@ const Hero = ({ name, title }: HeroProps) => {
               size="lg"
               onClick={() => {
                 // Add resume download functionality
-                window.open('https://drive.google.com/file/d/1CDhPLBUMc6BH96X90nv-sI_23y2FALTw/view?usp=sharing', '_blank');
+                window.open('https://drive.google.com/file/d/1jjSjEkPkaJnh8IoIw6dJjHWujkqz0kXV/view', '_blank');
               }}
             >
               Download Resume
