@@ -12,7 +12,7 @@ import { Box } from '@chakra-ui/react'
 
 const experiences = [
   {
-    title: "Service Delivery, Operations Manager, and Cloud Architect",
+    title: "Service Delivery, Operations Manager, and Cloud Architect - BMW (VDM) | IDOP",
     company: "Capgemini Technology Services",
     duration: "June 2021 – Present",
     description: [
