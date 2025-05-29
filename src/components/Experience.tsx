@@ -36,7 +36,7 @@ const Experience = ({ experiences }: ExperienceProps) => {
             size="xl"
             mb={12}
             textAlign="center"
-            bgGradient="linear(to-r, blue.400, purple.500)"
+            bgGradient="linear(to-r, brand.400, brand.600)"
             bgClip="text"
           >
             Work Experience
@@ -59,7 +59,7 @@ const Experience = ({ experiences }: ExperienceProps) => {
               <Text fontSize="xl" fontWeight="bold" color={colorMode === 'dark' ? 'white' : 'gray.800'}>
                 {exp.title}
               </Text>
-              <Text fontSize="lg" color="blue.400" mb={2}>
+              <Text fontSize="lg" color="brand.500" mb={2}>
                 {exp.company}
               </Text>
               <Text fontSize="md" color={colorMode === 'dark' ? 'gray.400' : 'gray.600'} mb={4}>

@@ -1,186 +1,137 @@
-import { Box, Flex, Button, useColorModeValue, IconButton, useDisclosure, VStack } from '@chakra-ui/react'
-import { Link } from 'react-scroll'
+import { Box, Container, Flex, Button, useColorMode, IconButton, useDisclosure, VStack, HStack, Link as ChakraLink } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa'
+import { Link as ScrollLink } from 'react-scroll'
 
 const MotionBox = motion(Box)
 
+const navItems = [
+  { name: 'Home', to: 'hero' },
+  { name: 'About', to: 'about' },
+  { name: 'Experience', to: 'experience' },
+  { name: 'Skills', to: 'skills' },
+  { name: 'Education', to: 'education' },
+  { name: 'Contact', to: 'contact' },
+]
+
 const Navbar = () => {
-  const sections = ['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact']
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { colorMode, toggleColorMode } = useColorMode()
+  const { isOpen, onToggle } = useDisclosure()
 
   return (
     <Box
+      as="nav"
       position="fixed"
       w="100%"
       zIndex={1000}
-      bg="rgba(147, 112, 219, 0.5)"
+      boxShadow="sm"
       backdropFilter="blur(10px)"
-      boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-      borderBottom="1px solid rgba(255, 255, 255, 0.1)"
+      bg={colorMode === 'dark' ? 'rgba(17, 24, 39, 0.8)' : 'rgba(255, 255, 255, 0.8)'}
     >
-      <Flex
-        maxW="1200px"
-        mx="auto"
-        px={6}
-        h={20}
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <MotionBox
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Box
-            fontWeight="bold"
-            fontSize={{ base: "xl", md: "2xl" }}
-            letterSpacing="wider"
-            color="white"
-            bgGradient="linear(to-r, pink.300, purple.400)"
-            bgClip="text"
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-            _hover={{
-              bgGradient: "linear(to-r, pink.200, purple.300)",
-              transform: "scale(1.05)",
-            }}
-            transition="all 0.3s ease"
-            cursor="pointer"
-          >
-            VEEDHI
-          </Box>
-        </MotionBox>
-
-        {/* Desktop Navigation */}
-        <Flex
-          gap={6}
-          display={{ base: 'none', md: 'flex' }}
-        >
-          {sections.map((section, index) => (
-            <Link
-              key={section}
-              to={section.toLowerCase()}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
+      <Container maxW="1200px">
+        <Flex h={16} alignItems="center" justifyContent="space-between">
+          <ScrollLink to="hero" smooth={true} duration={500} style={{ cursor: 'pointer' }}>
+            <MotionBox
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              fontWeight="bold"
+              fontSize="xl"
+              bgGradient="linear(to-r, brand.400, brand.600)"
+              bgClip="text"
             >
-              <MotionBox
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+              Siddhant
+            </MotionBox>
+          </ScrollLink>
+
+          {/* Desktop Navigation */}
+          <HStack spacing={8} display={{ base: 'none', md: 'flex' }}>
+            {navItems.map((item) => (
+              <ScrollLink
+                key={item.name}
+                to={item.to}
+                smooth={true}
+                duration={500}
+                style={{ cursor: 'pointer' }}
               >
-                <Button
-                  variant="ghost"
-                  color="white"
-                  fontSize="md"
-                  fontWeight="medium"
-                  letterSpacing="wide"
-                  px={4}
-                  py={2}
-                  position="relative"
+                <ChakraLink
+                  color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}
                   _hover={{
-                    bg: 'rgba(147, 112, 219, 0.2)',
-                    color: 'white',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 4px 12px rgba(147, 112, 219, 0.3)',
-                    _after: {
-                      width: '80%',
-                    },
-                  }}
-                  _active={{
-                    bg: 'rgba(147, 112, 219, 0.3)',
-                  }}
-                  transition="all 0.3s ease"
-                  _after={{
-                    content: '""',
-                    position: 'absolute',
-                    width: '0%',
-                    height: '2px',
-                    bottom: '0',
-                    left: '50%',
-                    bg: 'purple.300',
-                    transition: 'all 0.3s ease',
-                    transform: 'translateX(-50%)',
+                    color: 'brand.500',
+                    textDecoration: 'none',
                   }}
                 >
-                  {section}
-                </Button>
-              </MotionBox>
-            </Link>
-          ))}
+                  {item.name}
+                </ChakraLink>
+              </ScrollLink>
+            ))}
+          </HStack>
+
+          <Flex alignItems="center">
+            <IconButton
+              aria-label="Toggle color mode"
+              icon={colorMode === 'dark' ? <FaSun /> : <FaMoon />}
+              onClick={toggleColorMode}
+              variant="ghost"
+              color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}
+              _hover={{
+                bg: 'transparent',
+                color: 'brand.500',
+              }}
+              mr={2}
+            />
+
+            {/* Mobile menu button */}
+            <IconButton
+              aria-label="Toggle menu"
+              icon={isOpen ? <FaTimes /> : <FaBars />}
+              onClick={onToggle}
+              variant="ghost"
+              color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}
+              _hover={{
+                bg: 'transparent',
+                color: 'brand.500',
+              }}
+              display={{ base: 'flex', md: 'none' }}
+            />
+          </Flex>
         </Flex>
 
         {/* Mobile Navigation */}
-        <IconButton
-  display={{ base: 'flex', md: 'none' }}
-  onClick={onOpen}
-  icon={<HamburgerIcon />}
-  aria-label="Open Menu"
-  bg="purple.100"
-  color="purple.700"
-  borderRadius="full"
-  _hover={{ bg: 'purple.200' }}
-  _active={{ bg: 'purple.300' }}
-/>
-
-        {/* Mobile Menu Drawer */}
-       {/* Mobile Menu Drawer */}
-<Box
-  position="fixed"
-  top={0}
-  right={0}
-  bottom={0}
-  width="70%"
-  bg="rgba(50, 21, 93, 1)" // keep your dark theme
-  backdropFilter="blur(10px)"
-  zIndex={2000}
-  transform={isOpen ? 'translateX(0)' : 'translateX(100%)'}
-  transition="transform 0.3s ease-in-out"
-  boxShadow="-10px 0 30px rgba(0, 0, 0, 0.1)"
-  display={{ base: 'block', md: 'none' }}
->
-  <Flex justify="flex-end" p={4}>
-    <IconButton
-      onClick={onClose}
-      icon={<HamburgerIcon />}
-      aria-label="Close Menu"
-      variant="ghost"
-      color="white" // change from black to white
-      _hover={{ bg: 'rgba(147, 112, 219, 0.2)' }}
-      _active={{ bg: 'rgba(147, 112, 219, 0.3)' }}
-    />
-  </Flex>
-  <VStack as="nav" spacing={4} mt={8} px={4}>
-    {sections.map((section) => (
-      <Link
-        key={section}
-        to={section.toLowerCase()}
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={500}
-        onClick={onClose}
-        style={{ width: '100%' }}
-      >
-        <Button
-          variant="ghost"
-          color="white"
-          fontSize="lg"
-          fontWeight="medium"
-          letterSpacing="wide"
-          w="100%"
-          justifyContent="flex-start"
-          _hover={{ bg: 'rgba(255, 255, 255, 0.1)' }} // more contrast
-          _active={{ bg: 'rgba(255, 255, 255, 0.2)' }}
-        >
-          {section}
-        </Button>
-      </Link>
-    ))}
-  </VStack>
-</Box>
-      </Flex>
+        {isOpen && (
+          <Box
+            display={{ base: 'block', md: 'none' }}
+            pb={4}
+            bg={colorMode === 'dark' ? 'gray.900' : 'white'}
+          >
+            <VStack spacing={4} align="stretch">
+              {navItems.map((item) => (
+                <ScrollLink
+                  key={item.name}
+                  to={item.to}
+                  smooth={true}
+                  duration={500}
+                  style={{ cursor: 'pointer' }}
+                  onClick={onToggle}
+                >
+                  <ChakraLink
+                    display="block"
+                    px={4}
+                    py={2}
+                    color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}
+                    _hover={{
+                      color: 'brand.500',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {item.name}
+                  </ChakraLink>
+                </ScrollLink>
+              ))}
+            </VStack>
+          </Box>
+        )}
+      </Container>
     </Box>
   )
 }

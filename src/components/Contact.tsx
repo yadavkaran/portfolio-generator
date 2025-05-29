@@ -1,77 +1,43 @@
 import { Box, Container, Heading, Text, VStack, Link, Icon, useColorMode } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPhone } from 'react-icons/fa'
+import { FaEnvelope, FaPhone, FaLinkedin } from 'react-icons/fa'
 
 const MotionBox = motion(Box)
 
-interface ContactInfo {
+interface ContactProps {
   email: string
   phone: string
-  github?: string
   linkedin: string
-  twitter?: string
+  visa: string
 }
 
-interface ContactProps {
-  contact: ContactInfo
-}
-
-const Contact = ({ contact }: ContactProps) => {
+const Contact = ({ email, phone, linkedin, visa }: ContactProps) => {
   const { colorMode } = useColorMode()
 
   const socialLinks = [
     {
-      name: 'Phone',
-      url: `tel:${contact.phone}`,
+      name: phone,
+      url: `tel:${phone}`,
       icon: FaPhone,
     },
     {
-      name: 'Email',
-      url: `mailto:${contact.email}`,
+      name: email,
+      url: `mailto:${email}`,
       icon: FaEnvelope,
     },
     {
-      name: 'LinkedIn',
-      url: contact.linkedin,
+      name: linkedin,
+      url: linkedin,
       icon: FaLinkedin,
     },
   ]
-
-  if (contact.github) {
-    socialLinks.push({
-      name: 'GitHub',
-      url: contact.github,
-      icon: FaGithub,
-    })
-  }
-
-  if (contact.twitter) {
-    socialLinks.push({
-      name: 'Twitter',
-      url: contact.twitter,
-      icon: FaTwitter,
-    })
-  }
 
   return (
     <Box
       as="section"
       id="contact"
       py={20}
-      bg="rgba(147, 112, 219, 0.5)"
-      backdropFilter="blur(10px)"
-      position="relative"
-      overflow="hidden"
-      _before={{
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.2) 0%, rgba(147, 112, 219, 0.2) 100%)',
-        zIndex: -1,
-      }}
+      bg={colorMode === 'dark' ? 'gray.900' : 'gray.50'}
     >
       <Container maxW="1200px">
         <MotionBox
@@ -85,67 +51,51 @@ const Contact = ({ contact }: ContactProps) => {
             size="xl"
             mb={12}
             textAlign="center"
-            bgGradient="linear(to-r, pink.300, purple.300)"
+            bgGradient="linear(to-r, brand.400, brand.600)"
             bgClip="text"
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
           >
-            Contact
+            Contact Information
           </Heading>
         </MotionBox>
 
-        <VStack spacing={8}>
+        <VStack spacing={8} align="center">
           <MotionBox
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            textAlign="center"
+            p={8}
+            bg={colorMode === 'dark' ? 'gray.800' : 'white'}
+            borderRadius="lg"
+            boxShadow="md"
+            width="100%"
+            maxW="600px"
           >
-            <Text fontSize="lg" color="pink.100" mb={8}>
-              Feel free to reach out to me through any of the following channels.
-              I'm always open to discussing new projects, creative ideas, or
-              opportunities to be part of your vision.
-            </Text>
-          </MotionBox>
-
-          <MotionBox
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <VStack spacing={6}>
+            <VStack spacing={6} align="start">
               {socialLinks.map((link, index) => (
-                <MotionBox
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
+                <Box display="flex" alignItems="center" key={index}>
+                  <Icon
+                    as={link.icon}
+                    boxSize={6}
+                    mr={3}
+                    color="brand.500"
+                  />
                   <Link
                     href={link.url}
                     isExternal
-                    display="flex"
-                    alignItems="center"
-                    color="pink.200"
-                    _hover={{
-                      textDecoration: 'none',
-                      color: 'pink.100',
-                      transform: 'translateX(10px)',
-                    }}
-                    transition="all 0.2s"
+                    color="brand.500"
+                    _hover={{ textDecoration: 'underline', color: 'brand.400' }}
                   >
-                    <Icon
-                      as={link.icon}
-                      boxSize={6}
-                      mr={3}
-                      color="pink.300"
-                    />
-                    <Text fontSize="lg">{link.name}</Text>
+                    {link.name}
                   </Link>
-                </MotionBox>
+                </Box>
               ))}
+
+              <Box>
+                <Text fontSize="md" color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}>
+                  {visa}
+                </Text>
+              </Box>
             </VStack>
           </MotionBox>
         </VStack>

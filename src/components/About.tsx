@@ -1,13 +1,13 @@
-import { Box, Container, Heading, Text, SimpleGrid, useColorMode } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, useColorMode } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 const MotionBox = motion(Box)
 
 interface AboutProps {
-  about: string
+  description: string
 }
 
-const About = ({ about }: AboutProps) => {
+const About = ({ description }: AboutProps) => {
   const { colorMode } = useColorMode()
 
   return (
@@ -15,7 +15,7 @@ const About = ({ about }: AboutProps) => {
       as="section"
       id="about"
       py={20}
-      bg={colorMode === 'dark' ? 'gray.800' : 'white'}
+      bg={colorMode === 'dark' ? 'gray.900' : 'gray.50'}
     >
       <Container maxW="1200px">
         <MotionBox
@@ -34,20 +34,15 @@ const About = ({ about }: AboutProps) => {
           >
             About Me
           </Heading>
-        </MotionBox>
-
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-          <MotionBox
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          <Text
+            fontSize="lg"
+            color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}
+            textAlign="center"
+            lineHeight="tall"
           >
-            <Text fontSize="lg" color={colorMode === 'dark' ? 'gray.300' : 'gray.600'}>
-              {about}
-            </Text>
-          </MotionBox>
-        </SimpleGrid>
+            {description}
+          </Text>
+        </MotionBox>
       </Container>
     </Box>
   )

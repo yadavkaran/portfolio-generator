@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
 
 // Import your background images here
-import heroBg1 from '../assets/veedhi1.jpg' // <-- Replace with your actual image path
-import heroBg2 from '../assets/veedhi2.jpg' // <-- Replace with your actual image path
+import heroBg1 from '../assets/banner1.jpg' // <-- Replace with your actual image path
+import heroBg2 from '../assets/banner2.jpg' // <-- Replace with your actual image path
 
 const MotionBox = motion(Box)
 
@@ -68,7 +68,7 @@ const Hero = ({ name, title }: HeroProps) => {
             <Heading
               as="h1"
               size="2xl"
-              bgGradient="linear(to-r, blue.400, purple.500)"
+              bgGradient="linear(to-r, brand.400, brand.600)"
               bgClip="text"
               fontWeight="extrabold"
             >
@@ -93,7 +93,7 @@ const Hero = ({ name, title }: HeroProps) => {
           >
             <Button
               leftIcon={<FaDownload />}
-              colorScheme="blue"
+              colorScheme="brand"
               size="lg"
               onClick={() => {
                 // Add resume download functionality

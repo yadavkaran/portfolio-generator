@@ -7,68 +7,46 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
-  styles: {
-    global: {
-      body: {
-        bg: 'pink.900',
-        color: 'white',
-        backgroundImage: 'linear-gradient(to bottom right, #FF69B4, #9370DB, #FF1493)',
-        backgroundAttachment: 'fixed',
-      },
-      'h1, h2, h3, h4, h5, h6': {
-        color: 'white',
-        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-      },
-      p: {
-        color: 'pink.100',
-      },
-      a: {
-        color: 'pink.200',
-        _hover: {
-          color: 'pink.100',
-        },
-      },
+  colors: {
+    brand: {
+      50: '#E6F6F3',
+      100: '#C3E9E1',
+      200: '#9FDCCF',
+      300: '#7BCFBD',
+      400: '#57C2AB',
+      500: '#34B599', // Primary brand color
+      600: '#2A9180',
+      700: '#1F6D60',
+      800: '#154940',
+      900: '#0A2520',
     },
+  },
+  styles: {
+    global: (props: any) => ({
+      body: {
+        bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
+        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+      },
+    }),
   },
   components: {
-    Button: {
-      variants: {
-        solid: {
-          bg: 'pink.500',
-          color: 'white',
-          _hover: {
-            bg: 'pink.600',
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          },
-          transition: 'all 0.2s',
-        },
-        ghost: {
-          color: 'pink.100',
-          _hover: {
-            bg: 'pink.700',
-            color: 'white',
-          },
-        },
-      },
+    Heading: {
+      baseStyle: (props: any) => ({
+        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+      }),
     },
-    Box: {
+    Text: {
+      baseStyle: (props: any) => ({
+        color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
+      }),
+    },
+    Link: {
       baseStyle: {
-        bg: 'rgba(255, 192, 203, 0.1)',
-        backdropFilter: 'blur(10px)',
-        color: 'white',
-        borderRadius: 'lg',
-        boxShadow: 'xl',
-      },
-    },
-  },
-  semanticTokens: {
-    colors: {
-      bodyBg: {
-        default: 'pink.900',
-      },
-      bodyText: {
-        default: 'pink.100',
+        color: 'brand.500',
+        _hover: {
+          textDecoration: 'underline',
+          color: 'brand.400',
+        },
       },
     },
   },
