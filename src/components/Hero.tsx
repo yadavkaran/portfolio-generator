@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
 
 // Import your background images here
-import heroBg1 from '../assets/sid3.jpg' // <-- Replace with your actual image path
+import heroBg1 from '../assets/sid1.jpg' // <-- Replace with your actual image path
 import heroBg2 from '../assets/sid4.jpg' // <-- Replace with your actual image path
 
 const MotionBox = motion(Box)
