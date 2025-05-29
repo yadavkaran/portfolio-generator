@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
 
 // Import your background images here
-import heroBg1 from '../assets/sid1.jpg' // <-- Replace with your actual image path
-import heroBg2 from '../assets/sid2.jpg' // <-- Replace with your actual image path
+import heroBg1 from '../assets/sid3.jpg' // <-- Replace with your actual image path
+import heroBg2 from '../assets/sid4.jpg' // <-- Replace with your actual image path
 
 const MotionBox = motion(Box)
 
@@ -97,7 +97,7 @@ const Hero = ({ name, title }: HeroProps) => {
               size="lg"
               onClick={() => {
                 // Add resume download functionality
-                window.open('https://drive.google.com/file/d/1jjSjEkPkaJnh8IoIw6dJjHWujkqz0kXV/view', '_blank');
+                window.open('https://drive.google.com/file/d/1-2eRZq2N7RbGctKydtfrL3w-ga8d5XHe/view?usp=sharing', '_blank');
               }}
             >
               Download Resume
